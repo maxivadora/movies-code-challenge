@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: movies
+#
+#  id           :bigint(8)        not null, primary key
+#  release_year :integer
+#  title        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  release_year: 1
+
+two:
+  title: MyString
+  release_year: 1
