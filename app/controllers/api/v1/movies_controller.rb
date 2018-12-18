@@ -1,4 +1,5 @@
 class Api::V1::MoviesController < Api::V1::BaseController
+  skip_before_action :authorized_request!, only: [:index, :show]
   before_action :set_movie, only: [:show, :update, :destroy]
 
   def index

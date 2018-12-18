@@ -1,4 +1,5 @@
 class Api::V1::PeopleController < Api::V1::BaseController
+  skip_before_action :authorized_request!, only: [:index, :show]
   before_action :set_person, only: [:show, :update, :destroy]
 
   def index

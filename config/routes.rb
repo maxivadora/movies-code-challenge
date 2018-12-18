@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :people, only: [:index, :create, :show, :update, :destroy]
       resources :movies, only: [:index, :create, :show, :update, :destroy]
+      post 'login', to: 'authentication#login'
     end
   end
 end

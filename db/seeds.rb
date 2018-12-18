@@ -1,3 +1,5 @@
+User.create(email: 'admin@admin.com', password: 'admin', password_confirmation: 'admin')
+
 20.times do |i|
   p "Person #{i}"
   Person.create(
