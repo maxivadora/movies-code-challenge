@@ -4,17 +4,11 @@ class Api::V1::MoviesController < Api::V1::BaseController
 
   def index
     movies = Movie.all
-    render json: {movies: movies}, status: :ok
+    render json: movies, status: :ok
   end
 
   def show
-    render json: {
-        movie: @movie,
-        casting: @movie.casting,
-        producers: @movie.producers,
-        directors: @movie.directors
-      },
-      status: :ok
+    render json: @movie, status: :ok
   end
 
   def create
@@ -26,12 +20,7 @@ class Api::V1::MoviesController < Api::V1::BaseController
     add_person_to_movie
 
     if @movie.save
-      render json: {
-        movie: @movie,
-        casting: @movie.casting,
-        directors: @movie.directors,
-        producers: @movie.producers
-        }, status: :ok
+      render json: @movie, status: :ok
     else
       render json: { errors: @movie.errors }, status: :unprocessable_entity
     end
@@ -46,12 +35,7 @@ class Api::V1::MoviesController < Api::V1::BaseController
     update_person_in_movie
     
     if @movie.save
-      render json: {
-        movie: @movie,
-        casting: @movie.casting,
-        directors: @movie.directors,
-        producers: @movie.producers
-        }, status: :ok
+      render json: @movie, status: :ok
     else
       render json: { errors: @movie.errors }, status: :unprocessable_entity
     end

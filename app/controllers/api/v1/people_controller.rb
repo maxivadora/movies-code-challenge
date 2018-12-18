@@ -4,7 +4,7 @@ class Api::V1::PeopleController < Api::V1::BaseController
 
   def index
     @people = Person.all
-    render json: {people: @people}, status: :ok
+    render json: @people, status: :ok
   end
   
   def create
@@ -18,24 +18,12 @@ class Api::V1::PeopleController < Api::V1::BaseController
   end
 
   def show
-    render json: {
-      person: @person,
-      movies_as_actor_actress: @person.movies_as_actor_actress,
-      movies_as_producer: @person.movies_as_producer,
-      movies_as_director: @person.movies_as_director,
-      },
-      status: :ok
+    render json: @person, status: :ok
   end
 
   def update
     if @person.update(person_params)
-      render json: {
-        person: @person,
-        movies_as_actor_actress: @person.movies_as_actor_actress,
-        movies_as_producer: @person.movies_as_producer,
-        movies_as_director: @person.movies_as_director,
-        },
-        status: :ok
+      render json: @person, status: :ok
     else
       render json: { errors: @movie.errors }, status: :unprocessable_entity
     end
