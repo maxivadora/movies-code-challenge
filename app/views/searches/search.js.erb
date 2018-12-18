@@ -1,0 +1,2 @@
+<% js = escape_javascript( render 'movies/index', movies: @movies ) %>
+$("#results").html("<%= js %>");

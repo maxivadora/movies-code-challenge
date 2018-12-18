@@ -1,0 +1,13 @@
+- if movies.empty?
+  h4 No results found
+- else
+  table.table
+    thead
+      tr
+        th Title
+        th Release Year
+    tbody
+      - movies.each do |movie|
+        tr
+          td = movie.title
+          td = movie.roman_release_year

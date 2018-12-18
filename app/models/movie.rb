@@ -31,6 +31,8 @@ class Movie < ApplicationRecord
             through: :movie_people,
             source: :person
 
+  scope :search, ->(text){ where("title LIKE ?", "%#{text}%") }
+
   def roman_release_year
     number_to_roman(self.release_year)
   end
