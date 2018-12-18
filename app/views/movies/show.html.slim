@@ -1,0 +1,16 @@
+h1 = @movie.title
+h5 = @movie.roman_release_year
+h3 Casting:
+ul
+- @movie.casting.each do |person|
+  li = person.full_name
+h3 Directors:
+ul
+- @movie.directors.each do |directors|
+  li = directors.full_name
+h3 Producers:
+ul
+- @movie.producers.each do |producers|
+  li = producers.full_name
+
+= link_to 'Back', root_path

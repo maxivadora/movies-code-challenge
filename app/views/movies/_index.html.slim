@@ -6,8 +6,10 @@
       tr
         th Title
         th Release Year
+        th Show
     tbody
       - movies.each do |movie|
         tr
           td = movie.title
           td = movie.roman_release_year
+          td = link_to 'Ver', movie_path(movie), class: 'btn btn-sm btn-default'

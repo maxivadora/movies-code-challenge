@@ -30,4 +30,8 @@ class Person < ApplicationRecord
             class_name: 'Movie',
             through: :movie_people,
             source: :movie
+  
+  def full_name
+    "#{last_name.capitalize}, #{first_name.capitalize}"
+  end
 end
