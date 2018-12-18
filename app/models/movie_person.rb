@@ -24,5 +24,7 @@ class MoviePerson < ApplicationRecord
   belongs_to :movie
   belongs_to :person
 
+  validates :role, uniqueness: {scope: [:person_id, :movie_id]}
+
   enum role: [:actor_actress, :director, :producer]
 end

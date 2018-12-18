@@ -12,19 +12,21 @@
 class Movie < ApplicationRecord
   validates :title, :release_year, presence: true
 
-  has_many :movie_people
+  has_many :movie_people, dependent: :delete_all
+  has_many :people, through: :movie_people
   has_many :casting,
-            -> { joins(:movie_people).where(movie_people: { role: MoviePerson.roles[:actor_actress] }) },
+            -> { where(movie_people: { role: MoviePerson.roles[:actor_actress] }) },
             class_name: 'Person',
             through: :movie_people,
             source: :person
   has_many :directors,
-            -> { joins(:movie_people).where(movie_people: { role: MoviePerson.roles[:director] }) },
+            -> { where(movie_people: { role: MoviePerson.roles[:director] }) },
             class_name: 'Person',
-            through: :movie_people,
-            source: :person
+            source: :person,
+            through: :movie_people
+
   has_many :producers,
-            -> { joins(:movie_people).where(movie_people: { role: MoviePerson.roles[:producer] }) },
+            -> { where(movie_people: { role: MoviePerson.roles[:producer] }) },
             class_name: 'Person',
             through: :movie_people,
             source: :person

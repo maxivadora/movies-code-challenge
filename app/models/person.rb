@@ -13,20 +13,20 @@
 class Person < ApplicationRecord
   validates :last_name, :first_name, :aliases, presence: true
 
-  has_many :movie_people
+  has_many :movie_people, dependent: :delete_all
   has_many :movies, through: :movie_people
   has_many :movies_as_director,
-            -> { joins(:movie_people).where(movie_people: { role: MoviePerson.roles[:director] }) },
+            -> { where(movie_people: { role: MoviePerson.roles[:director] }) },
             class_name: 'Movie',
             through: :movie_people,
             source: :movie
   has_many :movies_as_actor_actress,
-            -> { joins(:movie_people).where(movie_people: { role: MoviePerson.roles[:actor_actress] }) },
+            -> { where(movie_people: { role: MoviePerson.roles[:actor_actress] }) },
             class_name: 'Movie',
             through: :movie_people,
             source: :movie
   has_many :movies_as_producer,
-            -> { joins(:movie_people).where(movie_people: { role: MoviePerson.roles[:producer] }) },
+            -> { where(movie_people: { role: MoviePerson.roles[:producer] }) },
             class_name: 'Movie',
             through: :movie_people,
             source: :movie
