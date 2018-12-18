@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Problem
+A company that has a website about movies wants to provide its customers and users an API to query their database, as well as provide the trusted company users the ability to update or create new records.
 
-Things you may want to cover:
+In order to complete this, you must create a RESTful interface that will provide access to the company’s database.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+###Requirements
+* Provide a REST API to access movies and persons models.
+* Safe methods are publicly available, no authentication is required.
+* Unsafe methods are only available to authenticated users.
+* Movie documents must include references or full documents to persons in their different roles.
+* Person documents must include references or full documents to movies in the different roles the Person has.
+* Movie documents must include the Release Year in roman numerals. This field should not be stored in the DB, just calculated on the fly.
+###Deliverables
+* The source code submitted to a shared Github repository.
+* The list of available endpoints and supported methods documented (could be in the same Github repo).
+* List of used libraries/frameworks.
+###Extra Credit
+* Project is deployed and running online (AWS, Heroku, cloud servers, own servers…)
+* User interface to browse items.
+* User interface to create/edit/delete items.
+* Justification of chosen libraries/frameworks against other popular choices.
