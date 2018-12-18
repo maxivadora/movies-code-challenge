@@ -15,21 +15,13 @@ class Person < ApplicationRecord
 
   has_many :movie_people, dependent: :delete_all
   has_many :movies, through: :movie_people
-  has_many :movies_as_director,
-            -> { where(movie_people: { role: MoviePerson.roles[:director] }) },
-            class_name: 'Movie',
-            through: :movie_people,
-            source: :movie
-  has_many :movies_as_actor_actress,
-            -> { where(movie_people: { role: MoviePerson.roles[:actor_actress] }) },
-            class_name: 'Movie',
-            through: :movie_people,
-            source: :movie
-  has_many :movies_as_producer,
-            -> { where(movie_people: { role: MoviePerson.roles[:producer] }) },
-            class_name: 'Movie',
-            through: :movie_people,
-            source: :movie
+  [:director, :actor_actress, :producer].each do |role|
+    has_many "movies_as_#{role}".to_sym,
+              -> { where(movie_people: { role: MoviePerson.roles[role] }) },
+              class_name: 'Movie',
+              through: :movie_people,
+              source: :movie
+  end
   
   def full_name
     "#{last_name.capitalize}, #{first_name.capitalize}"

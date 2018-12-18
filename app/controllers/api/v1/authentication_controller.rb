@@ -1,5 +1,5 @@
 class Api::V1::AuthenticationController < Api::V1::BaseController
-  skip_before_action :authorized_request!
+  skip_before_action :authorized_request!, only: [:login]
   
   def login
     user = User.find_by(email: login_params[:email].to_s.downcase)
@@ -13,6 +13,7 @@ class Api::V1::AuthenticationController < Api::V1::BaseController
   end
 
   private
+  
   def login_params
     params.permit(:email, :password)
   end

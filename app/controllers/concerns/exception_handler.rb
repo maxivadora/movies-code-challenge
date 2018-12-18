@@ -6,15 +6,15 @@ module ExceptionHandler
   class ExpiredToken < StandardError; end
 
   included do
-    rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
-    rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
-    rescue_from ExceptionHandler::ExpiredToken, with: :four_twenty_two
+    rescue_from ExceptionHandler::MissingToken, with: :error_422
+    rescue_from ExceptionHandler::InvalidToken, with: :error_422
+    rescue_from ExceptionHandler::ExpiredToken, with: :error_422
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   end
 
   private
 
-  def four_twenty_two(e)
+  def error_422(e)
     render json: { message: e.message }, status: :unprocessable_entity
   end
 

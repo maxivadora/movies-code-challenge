@@ -19,48 +19,18 @@ class Movie < ApplicationRecord
             class_name: 'Person',
             through: :movie_people,
             source: :person
-  has_many :directors,
-            -> { where(movie_people: { role: MoviePerson.roles[:director] }) },
-            class_name: 'Person',
-            source: :person,
-            through: :movie_people
-
-  has_many :producers,
-            -> { where(movie_people: { role: MoviePerson.roles[:producer] }) },
-            class_name: 'Person',
-            through: :movie_people,
-            source: :person
+  
+  [:director, :producer].each do |role|
+    has_many "#{role}s".to_sym,
+              -> { where(movie_people: { role: MoviePerson.roles[role] }) },
+              class_name: 'Person',
+              through: :movie_people,
+              source: :person
+  end
 
   scope :search, ->(text){ where("title LIKE ?", "%#{text}%") }
 
   def roman_release_year
-    number_to_roman(self.release_year)
-  end
-  
-  def number_to_roman(original_number)
-    roman_map = {
-      1000 => "M",
-      900 => "CM",
-      500 => "D",
-      400 => "CD",
-      100 => "C",
-      90 => "XC",
-      50 => "L",
-      40 => "XL",
-      10 => "X",
-      9 => "IX",
-      5 => "V",
-      4 => "IV",
-      1 => "I"
-    } 
-    result = ""
-    number = original_number
-
-    roman_map.keys.each do |divisor|
-      quotient, modulus = number.divmod(divisor)
-      result << roman_map[divisor] * quotient
-      number = modulus
-    end
-    result
+    Utils.number_to_roman(self.release_year)
   end
 end
