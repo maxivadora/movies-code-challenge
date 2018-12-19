@@ -71,3 +71,6 @@ Base path: `/api/v1/`
 * Default user: `email`:`admin@admin.com`, `password`: `admin`
 
 ## Staging
+
+URL: <http://movies-code-challenge.herokuapp.com>
+
